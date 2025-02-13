@@ -9,10 +9,13 @@ pub fn main() {
 
     let args_safefix: Vec<_> = args_split.next().unwrap_or_default().iter().collect();
     let mut dry = false;
-    let args_cargo:Vec<_> = args_safefix.iter().filter(|&&arg| {
-        dry |= arg == "--dry";
-        arg != "--dry"
-    }).collect();
+    let args_cargo: Vec<_> = args_safefix
+        .iter()
+        .filter(|&&arg| {
+            dry |= arg == "--dry";
+            arg != "--dry"
+        })
+        .collect();
 
     if dry {
         command.args(["clippy", "--frozen"]);
@@ -27,7 +30,7 @@ pub fn main() {
         ]);
     }
 
-    command.args(args_cargo.iter().skip(1)); // todo
+    command.args(args_cargo.iter().skip(2));
 
     command.arg("--");
 
@@ -65,5 +68,3 @@ pub fn main() {
         .expect("Failed to invoke cargo! Make sure it's in your $PATH");
     std::process::exit(results.code().unwrap());
 }
-
-// --all-targets --all-features
