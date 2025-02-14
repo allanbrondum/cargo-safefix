@@ -61,8 +61,6 @@ pub fn main() {
         command.args(args);
     }
 
-    println!("command {:?}", command);
-
     let results = command
         .status()
         .expect("Failed to invoke cargo! Make sure it's in your $PATH");
