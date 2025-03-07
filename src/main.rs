@@ -51,7 +51,7 @@ pub fn main() {
     for fix in ALL_GROUPS {
         command.args(["-A", fix]);
     }
-    
+
     for fix in include_str!("fix.txt")
         .split('\n')
         .map(|line| line.trim())
