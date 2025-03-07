@@ -51,9 +51,12 @@ pub fn main() {
     for fix in ALL_GROUPS {
         command.args(["-A", fix]);
     }
-
-    const SAFE_TO_FIX: &[&str] = &["unused_imports", "clippy::needless_borrow"];
-    for fix in SAFE_TO_FIX {
+    
+    for fix in include_str!("fix.txt")
+        .split('\n')
+        .map(|line| line.trim())
+        .filter(|line| !line.is_empty())
+    {
         command.args(["-W", fix]);
     }
 
